@@ -1,0 +1,40 @@
+{
+  "name": "devoxx-browserify",
+  "version": "1.0.0",
+  "author": "Paul Dijou <paul.dijou+dev@gmail.com>",
+  "description": "A funny live-coding presenting Browserify",
+  "dependencies": {
+    "url": "0.7.9",
+    "querystring": "0.2.0"
+  },
+  "devDependencies": {
+    "watchify": "0.6.4",
+    "browserify-shim": "3.2.2",
+    "deamdify": "0.1.1",
+    "debowerify": "0.7.0",
+    "grunt": "0.4.4",
+    "grunt-browserify": "2.0.7",
+    "gulp": "3.6.0",
+    "gulp-browserify": "0.5.0",
+    "gulp-rename": "1.2.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "browserify ./js/app.js -o ./js/main.js",
+    "watch": "watchify ./js/app.js -o ./js/main.js",
+    "multiple": "npm run multipleCommon && npm run multiplePage1 && npm run multiplePage2",
+    "multipleCommon": "browserify -r ./multiple/common.js -o ./multiple/build/common.js",
+    "multiplePage1": "browserify -x ./multiple/common.js ./multiple/page1 -o ./multiple/build/page1.js",
+    "multiplePage2": "browserify -x ./multiple/common.js ./multiple/page2 -o ./multiple/build/page2.js"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim",
+      "deamdify"
+    ]
+  },
+  "browserify-shim": {
+    "./js/samourai.js": "samourai",
+    "./js/ninja.js": "ninja"
+  }
+}
